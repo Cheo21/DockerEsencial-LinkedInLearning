@@ -1,0 +1,22 @@
+#Imagen base
+FROM debian
+
+#Comand
+RUN apt update \
+    && apt install -y nginx vim
+
+RUN rm /etc/nginx/sites-enabled/default
+
+ADD ficheros/curso.conf /etc/nginx/conf.d/curso.conf
+ADD ficheros/index.html /var/www/curso/index.html
+
+
+EXPOSE 80
+
+#Comando de arranque esto hace que nginx se ejecute en primer plano
+CMD ["nginx", "-g", "daemon off;"]
+
+#Variables de entorno
+#ENV variable1 valor1
+#ENV variable2 valor2
+#ENV variable3="valor3" variable4="valor4"
